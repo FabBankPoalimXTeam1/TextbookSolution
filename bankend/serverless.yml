@@ -92,7 +92,7 @@ functions:
           authorizer:
             name: authorizer
             arn: arn:aws:cognito-idp:us-east-1:535227525619:userpool/us-east-1_dkuJV7okL
-  transferToAccount:
+   transferToAccount:
     handler: handler.transferToAccount
     events:
       - http:
