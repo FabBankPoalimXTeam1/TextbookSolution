@@ -76,3 +76,23 @@ if  ((window.location.href.indexOf("bank-system-logged-in") > -1)) {
     loadLoginInfo();
 
 }
+
+
+// show user's current balance in account
+function transferToAccount() {
+    console.log("getting transferToAccount   " + authToken);
+    $.ajax({
+        method: 'POST',
+        url: _config.api.invokeUrl + "/transferToAccount",
+        headers: {
+            Authorization: authToken
+        },
+        contentType: 'application/json',
+        success: successGetBalance,
+        error: function ajaxError(jqXHR, textStatus, errorThrown) {
+        console.error('Error requesting balance: ', textStatus, ', Details: ', errorThrown);
+        console.error('Response: ', jqXHR.responseText);
+        alert('error getting transferToAccount ' + jqXHR.responseText);
+        }
+    });
+}
