@@ -74,3 +74,25 @@ module.exports.ensure_account_exists = async (username) => {
 
     return result;
 }
+
+
+module.exports.transferToAccount = async (srcUsername,dstUsername,srcBalance,dstBaLance) => {
+    var driver = getNeo4jDriver();
+    const session = driver.session();
+    const result = await session.run("Match (n:User) WHERE n.name='"+srcUsername+"' set n.balance = n.balance-sum RETURN n.balance");
+    session.close();
+    driver.close();
+
+    if (result.records.length == 0) {
+        return null;
+    }
+
+    record = result.records[0];
+    // get value and transform from neo4j-style-numbers
+    var curBalance = record._fields[0].properties.balance;
+    if ('low' in curBalance) { // if Neo4j long object, take only number.
+        curBalance = curBalance.low;
+    }
+    console.log("getBalance result:" + curBalance);
+    return Number(curBalance);
+}

@@ -55,6 +55,68 @@ module.exports.getaccountbalance = async (event, context) => {
   );
 };
 
+
+//TODO yoach
+module.exports.transferToAccount = async (event, context) => {
+  var srcUsername = getCognitoUser(event, context);
+  var dstUsername ="doronsgv-at-gmail.com"
+  var sum =100;
+
+  var srcAccount = await Account.ensure_account_exists(srcUsername);
+  if (srcAccount == null) {
+    return buildReturnJSON(
+      500,
+      JSON.stringify({
+        input: event,
+        username: srcUsername,
+        msg: "could not ensure user exists"
+      })
+    )
+  }
+  var  dstAccount = await Account.ensure_account_exists(dstUsername);
+  if (dstAccount == null) {
+    return buildReturnJSON(
+      500,
+      JSON.stringify({
+        input: event,
+        username: dstUsername,
+        msg: "could not ensure user exists"
+      })
+    )
+  }
+  
+  var srcBalance = await Account.get_balance_for_user(srcUsername);
+  if(srcBalance>=sum)
+  {
+    var dstBalance = await Account.get_balance_for_user(dstUsername);
+    srcBalance=srcBalance-sum; 
+    dstBalance=dstBalance+sum;
+
+    srcBalance = await Account.updateBalance(srcUsername,srcBalance);
+    dstBalance = await Account.updateBalance(dstUsername,dstBalance);
+    return buildReturnJSON(
+      200, 
+      JSON.stringify({
+        input: event,
+        srcBalance: srcBalance,
+        dstBalance: dstBalance,
+      })
+    );
+  }
+  else
+  {
+    return buildReturnJSON(
+      500,
+      JSON.stringify({
+        input: event,
+        username: srcBalance,
+        msg: "Balance Error"
+      })
+    )
+  }
+};
+
+
 module.exports.ensureuserexists = async (event, context) => {
   var username = getCognitoUser(event, context);
   var account = await Account.ensure_account_exists(username);
