@@ -76,10 +76,10 @@ module.exports.ensure_account_exists = async (username) => {
 }
 
 
-module.exports.transferToAccount = async (srcUsername,dstUsername,srcBalance,dstBaLance) => {
+module.exports.updateBalance = async (username,balance) => {
     var driver = getNeo4jDriver();
     const session = driver.session();
-    const result = await session.run("Match (n:User) WHERE n.name='"+srcUsername+"' set n.balance = n.balance-sum RETURN n.balance");
+    const result = await session.run("Match (n:User) WHERE n.name='"+username+"' set n.balance = '"+ balance+ "' RETURN n.balance");
     session.close();
     driver.close();
 
