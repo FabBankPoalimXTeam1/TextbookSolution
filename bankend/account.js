@@ -50,9 +50,11 @@ module.exports.get_balance_for_user = async (username) => {
     record = result.records[0];
     // get value and transform from neo4j-style-numbers
     var curBalance = record._fields[0].properties.balance;
+    /*
     if ('low' in curBalance) { // if Neo4j long object, take only number.
         curBalance = curBalance.low;
     }
+    */
     console.log("getBalance result:" + curBalance);
     return Number(curBalance);
 }
