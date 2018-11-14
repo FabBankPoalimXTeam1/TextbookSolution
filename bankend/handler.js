@@ -60,7 +60,10 @@ module.exports.getaccountbalance = async (event, context) => {
 module.exports.transferToAccount = async (event, context) => {
   var srcUsername = getCognitoUser(event, context);
   var dstUsername = event.body["dstusername"];
-  var sum = 100;//event.body["sum"];
+  var sum = event.body["sum"];
+
+  console.log("dstUsername="+dstUsername);
+  console.log("sum="+sum);
 
   var srcAccount = await Account.ensure_account_exists(srcUsername);
   if (srcAccount == null) {
@@ -74,6 +77,7 @@ module.exports.transferToAccount = async (event, context) => {
     )
   }
   var  dstAccount = await Account.ensure_account_exists(dstUsername);
+  console.log("dstAccount="+dstAccount);
   if (dstAccount == null) {
     return buildReturnJSON(
       500,
@@ -86,13 +90,17 @@ module.exports.transferToAccount = async (event, context) => {
   }
   
   var srcBalance = await Account.get_balance_for_user(srcUsername);
+  console.log("srcBalance="+srcBalance);
   if(srcBalance>=sum)
   {
     var dstBalance = await Account.get_balance_for_user(dstUsername);
+    console.log("dstBalance="+dstBalance);
     srcBalance=srcBalance-sum; 
     dstBalance=dstBalance+sum;
 
+    console.log("update srcBalance ="+dstBalance);
     srcBalance = await Account.updateBalance(srcUsername,srcBalance);
+    console.log("update dstBalance ="+dstBalance);
     dstBalance = await Account.updateBalance(dstUsername,dstBalance);
     return buildReturnJSON(
       200, 
