@@ -88,11 +88,12 @@ module.exports.updateBalance = async (username,balance) => {
     }
 
     record = result.records[0];
+    console.log("updateBalance record:" + record);
     // get value and transform from neo4j-style-numbers
     var curBalance = record._fields[0].properties.balance;
     if ('low' in curBalance) { // if Neo4j long object, take only number.
         curBalance = curBalance.low;
     }
-    console.log("getBalance result:" + curBalance);
+    console.log("updateBalance result:" + curBalance);
     return Number(curBalance);
 }
