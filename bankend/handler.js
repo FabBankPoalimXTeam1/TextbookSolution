@@ -60,7 +60,7 @@ module.exports.getaccountbalance = async (event, context) => {
 module.exports.transferToAccount = async (event, context) => {
   var srcUsername = getCognitoUser(event, context);
   var dstUsername = event.body["dstusername"];
-  var sum = event.body["sum"];
+  var sum = 100;//event.body["sum"];
 
   var srcAccount = await Account.ensure_account_exists(srcUsername);
   if (srcAccount == null) {
