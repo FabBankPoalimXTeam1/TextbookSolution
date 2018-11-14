@@ -81,18 +81,29 @@ if  ((window.location.href.indexOf("bank-system-logged-in") > -1)) {
 // show user's current balance in account
 function transferToAccount() {
     console.log("getting transferToAccount   " + authToken);
+   var dstusername =  $('.dst-user-name').val();
+   var sum=  $('.sum').val();
     $.ajax({
         method: 'POST',
         url: _config.api.invokeUrl + "/transferToAccount",
         headers: {
             Authorization: authToken
         },
+        data: jQuery.param({ dstusername: dstusername, sum : sum}) ,
         contentType: 'application/json',
-        success: successGetBalance,
+        success: successTransferToAccount,
         error: function ajaxError(jqXHR, textStatus, errorThrown) {
         console.error('Error requesting balance: ', textStatus, ', Details: ', errorThrown);
         console.error('Response: ', jqXHR.responseText);
         alert('error getting transferToAccount ' + jqXHR.responseText);
         }
     });
+}
+
+// show result after JSON returns
+function successTransferToAccount(result) {
+    console.log("successTransferToAccount: ")
+    console.log(result);
+    alert("Your srcBalance is " + result.srcBalance);
+    alert("Your dstBalance is " + result.dstBalance);
 }
