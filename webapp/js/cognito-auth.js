@@ -148,7 +148,7 @@ var BankApp = window.BankApp || {};
         console.log("getting transferToAccount   " + authToken);
         $.ajax({
             method: 'POST',
-            url: _config.api.invokeUrl + "/transferToAccount",
+            url: _config.api.invokeUrl + "transferToAccount",
             headers: {
                 Authorization: authToken
             },
