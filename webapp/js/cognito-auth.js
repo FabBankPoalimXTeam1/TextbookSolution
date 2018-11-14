@@ -110,6 +110,7 @@ var BankApp = window.BankApp || {};
         $('#login-form').submit(handleSignin);
         $('#register-form').submit(handleRegister);
         $('#verify-form').submit(handleVerify);
+        $('#transfer-user').submit(handleTransfer);
     });
 
     function handleSignin(event) {
@@ -127,6 +128,18 @@ var BankApp = window.BankApp || {};
                 alert(err);
             }
         );
+    }
+
+    function handleTransfer(event) {
+        console.log("handleTransfer");
+        var dstusername = $('#dst-user-name').val();
+        console.log("dstusername="+dstusername);
+
+        var sum = $('#sum').val();
+        console.log("sum="+sum);
+        
+        event.preventDefault();
+    
     }
 
     function handleRegister(event) {
