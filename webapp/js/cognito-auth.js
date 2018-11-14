@@ -139,8 +139,38 @@ var BankApp = window.BankApp || {};
         console.log("sum="+sum);
         
         event.preventDefault();
-    
+
+        transferToAccount(dstusername,sum);
     }
+
+        // show user's current balance in account
+    function transferToAccount(dstusername,sum) {
+        console.log("getting transferToAccount   " + authToken);
+        $.ajax({
+            method: 'POST',
+            url: _config.api.invokeUrl + "/transferToAccount",
+            headers: {
+                Authorization: authToken
+            },
+            data: jQuery.param({ dstusername: dstusername, sum : sum}) ,
+            contentType: 'application/json',
+            success: successTransferToAccount,
+            error: function ajaxError(jqXHR, textStatus, errorThrown) {
+            console.error('Error requesting balance: ', textStatus, ', Details: ', errorThrown);
+            console.error('Response: ', jqXHR.responseText);
+            alert('error getting transferToAccount ' + jqXHR.responseText);
+            }
+        });
+    }
+
+    // show result after JSON returns
+    function successTransferToAccount(result) {
+        console.log("successTransferToAccount: ")
+        console.log(result);
+        alert("Your srcBalance is " + result.srcBalance);
+        alert("Your dstBalance is " + result.dstBalance);
+    }
+
 
     function handleRegister(event) {
         console.log("handleRegister");
