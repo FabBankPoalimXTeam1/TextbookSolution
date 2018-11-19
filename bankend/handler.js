@@ -59,7 +59,10 @@ module.exports.getaccountbalance = async (event, context) => {
 //TODO yoach
 module.exports.transferToAccount = async (event, context) => {
   var srcUsername = getCognitoUser(event, context);
-  var dstUsername = event.body["dstusername"];
+ 
+  var body = event.body;
+  
+  var dstUsername = event.body;
   var sum =  event.body["sum"];
 
   var temp = JSON.stringify({
