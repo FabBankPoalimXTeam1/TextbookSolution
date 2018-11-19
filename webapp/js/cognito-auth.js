@@ -152,7 +152,7 @@ var BankApp = window.BankApp || {};
             headers: {
                 Authorization: authToken
             },
-            data:{ dstusername: dstusername, sum: sum} ,
+            data: JSON.stringify( { "dstusername": dstusername, "sum": sum} ) ,
             contentType: 'application/json',
             success: successTransferToAccount,
             error: function ajaxError(jqXHR, textStatus, errorThrown) {

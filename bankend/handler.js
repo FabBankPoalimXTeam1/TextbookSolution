@@ -60,9 +60,7 @@ module.exports.getaccountbalance = async (event, context) => {
 module.exports.transferToAccount = async (event, context) => {
   var srcUsername = getCognitoUser(event, context);
  
-  var body = event.body;
-  
-  var dstUsername = event.body;
+  var dstUsername = event.body["dstusername"];
   var sum =  event.body["sum"];
 
   var temp = JSON.stringify({
