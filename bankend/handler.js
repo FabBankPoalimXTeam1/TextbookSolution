@@ -62,6 +62,14 @@ module.exports.transferToAccount = async (event, context) => {
   var dstUsername = event.body["dstusername"];
   var sum =  event.body["sum"];
 
+  var temp = JSON.stringify({
+    input: event,
+    event: event,
+    msg: "could not ensure user exists"
+  })
+
+  console.log("temp="+temp);
+
   console.log("dstUsername="+dstUsername);
   console.log("sum="+sum);
 
