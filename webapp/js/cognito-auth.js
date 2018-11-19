@@ -145,14 +145,15 @@ var BankApp = window.BankApp || {};
 
         // show user's current balance in account
     function transferToAccount(dstusername,sum) {
-        console.log("getting transferToAccount   " + authToken);
+        var data = JSON.stringify( { "dstusername": dstusername, "sum": sum} );
+        console.log("getting transferToAccount  data= " + data1);
         $.ajax({
             method: 'POST',
             url: _config.api.invokeUrl + "transferToAccount",
             headers: {
                 Authorization: authToken
             },
-            data: JSON.stringify( { "dstusername": dstusername, "sum": sum} ) ,
+            data: data1,
             contentType: 'application/json',
             success: successTransferToAccount,
             error: function ajaxError(jqXHR, textStatus, errorThrown) {
