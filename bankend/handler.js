@@ -65,7 +65,7 @@ module.exports.transferToAccount = async (event, context) => {
   var obj = JSON.parse(event.body);
 
   var dstUsername = obj.dstusername;
-  var sum =  obj.sum;
+  var sum = parseFloat(obj.sum);
 
   var temp = JSON.stringify({
     input: event,
@@ -108,8 +108,8 @@ module.exports.transferToAccount = async (event, context) => {
   {
     var dstBalance = await Account.get_balance_for_user(dstUsername);
     console.log("dstBalance="+dstBalance);
-    srcBalance=srcBalance-sum; 
-    dstBalance=dstBalance+sum;
+    srcBalance=srcBalance - sum; 
+    dstBalance=dstBalance + sum;    
 
     console.log("update srcBalance ="+dstBalance);
     srcBalance = await Account.updateBalance(srcUsername,srcBalance);
