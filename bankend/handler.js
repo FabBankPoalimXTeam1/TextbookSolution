@@ -62,6 +62,8 @@ module.exports.transferToAccount = async (event, context) => {
  
   console.log("body="+event.body);
 
+  console.log("event-Json"+event.JSON);
+  
   var obj = JSON.parse(event.body);
 
   var dstUsername = obj.dstusername;

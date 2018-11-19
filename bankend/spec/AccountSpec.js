@@ -1,4 +1,5 @@
 const Account = require('../account');
+const Handler = require('../handler');
 
 describe("Account", function() {
     beforeAll(async function() {
@@ -18,6 +19,28 @@ describe("Account", function() {
         var balance = await Account.updateBalance("TEST2-at-kashyoo.com",200)
 	expect (balance).toEqual(200);
     });
+
+    it("return 500 when no balance in customer account", async function() {
+        var driver = getNeo4jDriver();
+        const session = driver.session();
+        
+        var balanceUserSrcName = "test_balance_src-at-kashyoo.com";
+        var balanceUserDestName = "test_balance_dest-at-kashyoo.com";
+
+        var result = null;
+        if (!await userExists(session, balanceUserSrcName)) {
+            result = await createUser(session, balanceUserSrcName);//with 7000
+        }
+        else {
+            var newBalance = Account.updateBalance(balanceUserSrcName, 7000);
+        }
+        session.close();
+        driver.close();
+    
+        console.log("transfer from " + balanceUserSrcName + " to " + balanceUserDestName + ", 10000");
+        
+        //Handler.transferToAccount(balanceUserSrcName, balanceUserDestName);
+    }
 
 });
 
