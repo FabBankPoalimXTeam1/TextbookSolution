@@ -9,7 +9,7 @@ describe("Account", function() {
         var balance = await Account.get_balance_for_user("nonexist");
 	expect (balance).toEqual(null);
     });
-
+/*
     it("return 200 for test user", async function() {
         var balance = await Account.get_balance_for_user("TEST2-at-kashyoo.com");
 	expect (balance).toEqual(200);
@@ -18,5 +18,6 @@ describe("Account", function() {
         var balance = await Account.updateBalance("TEST2-at-kashyoo.com",200)
 	expect (balance).toEqual(200);
     });
+    */
 });
 
