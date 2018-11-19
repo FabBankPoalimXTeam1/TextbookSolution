@@ -129,8 +129,8 @@ module.exports.transferToAccount = async (event, context) => {
     return buildReturnJSON(
       500,
       JSON.stringify({
-        input: event,
-        username: srcBalance,
+       // input: event,
+       // username: srcBalance,
         msg: "Balance Error"
       })
     )
