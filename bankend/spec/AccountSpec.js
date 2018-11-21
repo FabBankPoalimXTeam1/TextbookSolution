@@ -42,7 +42,7 @@ describe("Account", function() {
         var returnedValue = Account.transferToAccount(balanceUserSrcName, balanceUserDestName, 30000);
 
         expect (returnedValue).toEqual(4);
-    }
+    });
 
 });
 
