@@ -1,14 +1,6 @@
 const Account = require('../account');
 const Handler = require('../handler');
 
-function getNeo4jDriver()
-{
-        console.log("Connecting to neo4j");
-        var driver = neo4j.driver(neo4jEndpoint, neo4j.auth.basic(neo4jUser, neo4jPassword));
-        console.log("Created neo4j driver.");
-        return driver;
-}
-
 describe("Account", function() {
     beforeAll(async function() {
         await Account.ensure_account_exists("TEST2-at-kashyoo.com");
