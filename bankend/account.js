@@ -6,7 +6,7 @@ const neo4jEndpoint = process.env.NEO4J_ENDPOINT;
 
 const INITIAL_BALANCE = 7000;
 
-module.exports.getNeo4jDriver()
+function getNeo4jDriver()
 {
         console.log("Connecting to neo4j");
         var driver = neo4j.driver(neo4jEndpoint, neo4j.auth.basic(neo4jUser, neo4jPassword));
@@ -129,7 +129,7 @@ module.exports.transferToAccount = async (srcUsername,dstUsername, sum) => {
       srcBalance = await Account.updateBalance(srcUsername,srcBalance);
       console.log("update dstBalance ="+dstBalance);
       dstBalance = await Account.updateBalance(dstUsername,dstBalance);
-
+      
       return 3;
     }
     else

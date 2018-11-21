@@ -20,8 +20,8 @@ describe("Account", function() {
 	expect (balance).toEqual(200);
     });
 
-    it("return error 4 when no balance in customer account", async function() {
-        var driver = getNeo4jDriver();
+    it("return the right error code when no balance at the customer account", async function() {
+/*        var driver = getNeo4jDriver();
         const session = driver.session();
         
         var balanceUserSrcName = "test_balance_src-at-kashyoo.com";
@@ -36,10 +36,16 @@ describe("Account", function() {
         }
         session.close();
         driver.close();
-    
-        console.log("transfer from " + balanceUserSrcName + " to " + balanceUserDestName + ", 30000");
+*/
 
-        var returnedValue = Account.transferToAccount(balanceUserSrcName, balanceUserDestName, 30000);
+        var srcUserName = "test_balance_dest-at-kashyoo.com";
+
+        await Account.ensure_account_exists(srcUserName);
+        var newBalance = Account.updateBalance(srcUserName, 5000);
+
+        console.log("trying to transfer from " + srcUserName + " to " + "TEST2-at-kashyoo.com" + ", 30000");
+
+        var returnedValue = Account.transferToAccount(srcUserName, "TEST2-at-kashyoo.com", 30000);
 
         expect (returnedValue).toEqual(4);
     });
