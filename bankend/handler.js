@@ -56,7 +56,7 @@ module.exports.getaccountbalance = async (event, context) => {
 };
 
 
-//TODO yoach
+/*
 module.exports.transferToAccount = async (event, context) => {
   var srcUsername = getCognitoUser(event, context);
  
@@ -137,6 +137,70 @@ module.exports.transferToAccount = async (event, context) => {
       })
     )
   }
+};
+*/
+module.exports.transferToAccount = async (event, context) => {
+  var srcUsername = getCognitoUser(event, context);
+ 
+  console.log("body="+event.body);
+
+  console.log("event-Json"+event.JSON);
+  
+  var obj = JSON.parse(event.body);
+
+  var dstUsername = obj.dstusername;
+  var sum = parseFloat(obj.sum);
+
+
+  console.log("dstUsername="+dstUsername);
+  console.log("sum="+sum);
+
+  var retCode = await Account.transferToAccount(srcUsername,dstUsername,sum);
+
+  switch (retCode) {
+    case 1:
+    return  buildReturnJSON(
+      500,
+      JSON.stringify({
+        input: event,
+        username: srcUsername,
+        msg: "could not ensure user exists"
+      }));
+    case 2:
+    return buildReturnJSON(
+      500,
+      JSON.stringify({
+        input: event,
+        username: dstUsername,
+        msg: "could not ensure user exists"
+      }));
+    case 3:
+    return buildReturnJSON(
+      200, 
+      JSON.stringify({
+        input: event,
+        srcBalance: 11,
+        dstBalance: 11,
+      }));
+     case 4:
+     return buildReturnJSON(
+      500,
+      JSON.stringify({
+       // input: event,
+       // username: srcBalance,
+        msg: "Balance Error"
+      }));
+    default:
+    return buildReturnJSON(
+      500,
+      JSON.stringify({
+       // input: event,
+       // username: srcBalance,
+        msg: "default Balance Error"
+      }));
+  }
+
+ 
 };
 
 

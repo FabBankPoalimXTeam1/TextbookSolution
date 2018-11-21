@@ -20,7 +20,7 @@ describe("Account", function() {
 	expect (balance).toEqual(200);
     });
 
-    it("return 500 when no balance in customer account", async function() {
+    it("return error 4 when no balance in customer account", async function() {
         var driver = getNeo4jDriver();
         const session = driver.session();
         
@@ -37,11 +37,11 @@ describe("Account", function() {
         session.close();
         driver.close();
     
-        console.log("transfer from " + balanceUserSrcName + " to " + balanceUserDestName + ", 10000");
+        console.log("transfer from " + balanceUserSrcName + " to " + balanceUserDestName + ", 30000");
 
-        //Handler.transferToAccount(balanceUserSrcName, balanceUserDestName);
+        var returnedValue = Account.transferToAccount(balanceUserSrcName, balanceUserDestName, 30000);
 
-        expect (true).toEqual(true);
+        expect (returnedValue).toEqual(4);
     }
 
 });
