@@ -102,6 +102,17 @@ functions:
           authorizer:
             name: authorizer
             arn: arn:aws:cognito-idp:us-east-1:535227525619:userpool/us-east-1_dkuJV7okL
+    transferToAccount2:
+    handler: handler.transferToAccount2
+    events:
+      - http:
+          path: transferToAccount2
+          method: post
+          cors: true
+          authorizer:
+            name: authorizer
+            arn: arn:aws:cognito-idp:us-east-1:535227525619:userpool/us-east-1_dkuJV7okL
+
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
