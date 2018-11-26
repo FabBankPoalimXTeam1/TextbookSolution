@@ -38,7 +38,8 @@ describe("Account", function() {
         var returnedValue = Account.transferMoneyToAccount(srcUserName, dstUserName, 30000);
         console.log("TEST: transfer: " + returnedValue);
 
-        expect (returnedValue).toEqual(4);
+        var res = Number(4);
+        expect (returnedValue).toEqual(res);
     });
 
 });
