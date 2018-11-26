@@ -23,7 +23,7 @@ describe("Account", function() {
     it("return the right error code when no balance at the customer account", async function() {
         var srcUserName = "test_balance_src-at-kashyoo.com";
 
-        var success = await Account.createUser(srcUserName);
+        var success = await Account.ensure_account_exists(srcUserName);
         console.log("TEST: is account exist: " + success);
 
         var newBalance = Account.updateBalance(srcUserName, 5000);
