@@ -31,7 +31,7 @@ describe("Account", function() {
 
         console.log("TEST: trying to transfer from " + srcUserName + " to " + "TEST2-at-kashyoo.com" + ", 30000");
 
-        var returnedValue = Account.transferToAccount(srcUserName, "TEST2-at-kashyoo.com", 30000);
+        var returnedValue = Account.transferMoneyToAccount(srcUserName, "TEST2-at-kashyoo.com", 30000);
         console.log("TEST: transfer: " + returnedValue);
 
         expect (returnedValue).toEqual(4);
