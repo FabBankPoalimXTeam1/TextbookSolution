@@ -101,7 +101,7 @@ function newFunction() {
     console.log("updateBalance record:" + record);
 }
 
-module.exports.transferToAccount = async (srcUsername,dstUsername, sum) => {
+module.exports.transferMoneyToAccount = async (srcUsername,dstUsername, sum) => {
   
     console.log("dstUsername="+dstUsername);
     console.log("sum="+sum);

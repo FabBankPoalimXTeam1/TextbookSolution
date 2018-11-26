@@ -155,7 +155,7 @@ module.exports.transferToAccount = async (event, context) => {
   console.log("dstUsername="+dstUsername);
   console.log("sum="+sum);
 
-  var retCode = await Account.transferToAccount(srcUsername,dstUsername,sum);
+  var retCode = await Account.transferMoneyToAccount(srcUsername,dstUsername,sum);
 
   switch (retCode) {
     case 1:
