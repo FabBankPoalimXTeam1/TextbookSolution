@@ -106,31 +106,28 @@ module.exports.updateBalance2 = async (username,srcBalance,dstBalance,sum,userna
  
     var driver3 = getNeo4jDriver();
     const session3 = driver.session();
-    const result3 = await session.run("Match (m:User) WHERE m.name='"+dstBalance+"' set m.balance = '"+dstBalance+ "' RETURN m");
+    const result3 = await session3.run("Match (m:User) WHERE m.name='"+dstBalance+"' set m.balance = '"+dstBalance+ "' RETURN m");
     session3.close();
     driver3.close();
 
     var driver2 = getNeo4jDriver();
     const session2 = driver.session();
-    const result2 = await session.run("CREATE (e:Event { Sum:'" +sum+"'}) return id(e)");
+    const result2 = await session2.run("CREATE (e:Event { Sum:'" +sum+"'}) return id(e)");
     session2.close();
     driver2.close();
 
     var driver1 = getNeo4jDriver();
     const session1 = driver.session();
-    const result1 = await session.run("MATCH (u1:User),(u2:User),(e:Event) WHERE u1.name = "+username+" AND u2.name = "+username2+" AND id(e)='"+result2+"' create (u1)-[tf:TransferFrom]->(e), (e)-[tt:TransferTo]->(u2) RETURN u1,u2,e " );
+    const result1 = await session1.run("MATCH (u1:User),(u2:User),(e:Event) WHERE u1.name = "+username+" AND u2.name = "+username2+" AND id(e)='"+result2+"' create (u1)-[tf:TransferFrom]->(e), (e)-[tt:TransferTo]->(u2) RETURN u1,u2,e " );
     session1.close();
     driver1.close();
-
-
-
 
     if (result.records.length == 0) {
         return null;
     }
 
     record = result.records[0];
-    newFunction();
+    //newFunction();
     // get value and transform from neo4j-style-numbers
     var curBalance = record._fields[0].properties.balance;
   
@@ -138,7 +135,7 @@ module.exports.updateBalance2 = async (username,srcBalance,dstBalance,sum,userna
     return Number(curBalance);
 }
 function newFunction() {
-    console.log("updateBalance record:" + record);
+    //console.log("updateBalance record:" + record);
 }
 
 module.exports.transferMoneyToAccount = async (srcUsername,dstUsername, sum) => {
