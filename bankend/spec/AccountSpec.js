@@ -36,10 +36,13 @@ describe("Account", function() {
         console.log("TEST: trying to transfer from " + srcUserName + " to " + dstUserName + ", 30000");
 
         var returnedValue = Account.transferMoneyToAccount(srcUserName, dstUserName, 30000);
-        console.log("TEST: transfer: " + returnedValue);
+        var json = JSON.stringify({
+            input: returnedValue
+          })
+          
+        console.log("TEST: transfer: " + json);
 
-        var res = Number(4);
-        expect (returnedValue).toEqual(res);
+        expect (returnedValue).toEqual(4);
     });
 
 });

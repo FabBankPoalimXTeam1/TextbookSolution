@@ -108,12 +108,12 @@ module.exports.transferMoneyToAccount = async (srcUsername,dstUsername, sum) => 
   
     var srcAccount = await module.exports.ensure_account_exists(srcUsername);
     if (srcAccount == null) {
-      return  Number(1);
+      return 1;
     }
     var  dstAccount = await module.exports.ensure_account_exists(dstUsername);
     console.log("dstAccount="+dstAccount);
     if (dstAccount == null) {
-      return Number(2);
+      return 2;
     }
     
     var srcBalance = await Account.get_balance_for_user(srcUsername);
@@ -130,11 +130,11 @@ module.exports.transferMoneyToAccount = async (srcUsername,dstUsername, sum) => 
       console.log("update dstBalance ="+dstBalance);
       dstBalance = await Account.updateBalance(dstUsername,dstBalance);
       
-      return Number(3);
+      return 3;
     }
     else
     {
-      return Number(4);
+      return 4;
     }
   };
 
