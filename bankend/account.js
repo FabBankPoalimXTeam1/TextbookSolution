@@ -118,7 +118,7 @@ module.exports.updateBalance2 = async (username,srcBalance,dstBalance,sum,userna
 
     var driver1 = getNeo4jDriver();
     const session1 = driver.session();
-    const result1 = await session1.run("MATCH (u1:User),(u2:User),(e:Event) WHERE u1.name = "+username+" AND u2.name = "+username2+" AND id(e)='"+result2+"' create (u1)-[tf:TransferFrom]->(e), (e)-[tt:TransferTo]->(u2) RETURN u1,u2,e " );
+    const result1 = await session1.run("MATCH (u1:User),(u2:User),(e:Event) WHERE u1.name = "+username+" AND u2.name = "+username2+" AND id(e)='"+result2.records[0]+"' create (u1)-[tf:TransferFrom]->(e), (e)-[tt:TransferTo]->(u2) RETURN u1,u2,e" );
     session1.close();
     driver1.close();
 
