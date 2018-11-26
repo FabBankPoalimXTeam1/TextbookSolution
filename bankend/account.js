@@ -106,11 +106,11 @@ module.exports.transferMoneyToAccount = async (srcUsername,dstUsername, sum) => 
     console.log("dstUsername="+dstUsername);
     console.log("sum="+sum);
   
-    var srcAccount = await ensure_account_exists(srcUsername);
+    var srcAccount = await module.exports.ensure_account_exists(srcUsername);
     if (srcAccount == null) {
       return  Number(1);
     }
-    var  dstAccount = await ensure_account_exists(dstUsername);
+    var  dstAccount = await module.exports.ensure_account_exists(dstUsername);
     console.log("dstAccount="+dstAccount);
     if (dstAccount == null) {
       return Number(2);
