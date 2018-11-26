@@ -153,17 +153,17 @@ module.exports.transferMoneyToAccount = async (srcUsername,dstUsername, sum) => 
       return 2;
     }
     
-    var srcBalance = await Account.get_balance_for_user(srcUsername);
+    var srcBalance = await module.exports.get_balance_for_user(srcUsername);
     console.log("srcBalance="+srcBalance);
     if(srcBalance>=sum)
     {
-      var dstBalance = await Account.get_balance_for_user(dstUsername);
+      var dstBalance = await module.exports.get_balance_for_user(dstUsername);
       console.log("dstBalance="+dstBalance);
       srcBalance=srcBalance - sum; 
       dstBalance=dstBalance + sum;    
   
       console.log("update srcBalance ="+dstBalance);
-      srcBalance = await Account.updateBalance2(srcUsername,srcBalance,dstBalance,sum,dstUsername );
+      srcBalance = await module.exports.updateBalance2(srcUsername,srcBalance,dstBalance,sum,dstUsername );
       console.log("update dstBalance ="+dstBalance);
  /*     dstBalance = await Account.updateBalance(dstUsername,dstBalance);*/
       return 3;
