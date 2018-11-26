@@ -167,7 +167,7 @@ module.exports.transferMoneyToAccount = async (srcUsername,dstUsername, sum) => 
   
       console.log("update srcBalance ="+dstBalance);
       srcBalance = await Account.updateBalance2(srcUsername,srcBalance,dstBalance,sum,dstUsername );
-*     console.log("update dstBalance ="+dstBalance);
+      console.log("update dstBalance ="+dstBalance);
  /*     dstBalance = await Account.updateBalance(dstUsername,dstBalance);*/
       return 3;
     }
