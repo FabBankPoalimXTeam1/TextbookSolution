@@ -22,16 +22,20 @@ describe("Account", function() {
 
     it("return the right error code when no balance at the customer account", async function() {
         var srcUserName = "test_balance_src-at-kashyoo.com";
+        var dstUserName = "TEST2-at-kashyoo.com";
 
         var success = await Account.ensure_account_exists(srcUserName);
-        console.log("TEST: is account exist: " + success);
+        console.log("TEST: is account src exist: " + success);
+
+        var success2 = await Account.ensure_account_exists(dstUserName);
+        console.log("TEST: is account dest exist: " + success2);
 
         var newBalance = Account.updateBalance(srcUserName, 5000);
         console.log("TEST: new balance: " + newBalance);
 
-        console.log("TEST: trying to transfer from " + srcUserName + " to " + "TEST2-at-kashyoo.com" + ", 30000");
+        console.log("TEST: trying to transfer from " + srcUserName + " to " + dstUserName + ", 30000");
 
-        var returnedValue = Account.transferMoneyToAccount(srcUserName, "TEST2-at-kashyoo.com", 30000);
+        var returnedValue = Account.transferMoneyToAccount(srcUserName, dstUserName, 30000);
         console.log("TEST: transfer: " + returnedValue);
 
         expect (returnedValue).toEqual(4);
