@@ -56,89 +56,6 @@ module.exports.getaccountbalance = async (event, context) => {
 };
 
 
-/*
-module.exports.transferToAccount = async (event, context) => {
-  var srcUsername = getCognitoUser(event, context);
- 
-  console.log("body="+event.body);
-
-  console.log("event-Json"+event.JSON);
-  
-  var obj = JSON.parse(event.body);
-
-  var dstUsername = obj.dstusername;
-  var sum = parseFloat(obj.sum);
-
-  var temp = JSON.stringify({
-    input: event,
-    event: event,
-    msg: "could not ensure user exists"
-  })
-
-  console.log("temp="+temp);
-
-  console.log("dstUsername="+dstUsername);
-  console.log("sum="+sum);
-
-  var srcAccount = await Account.ensure_account_exists(srcUsername);
-  if (srcAccount == null) {
-    return  buildReturnJSON(
-      500,
-      JSON.stringify({
-        input: event,
-        username: srcUsername,
-        msg: "could not ensure user exists"
-      })
-    )
-  }
-  var  dstAccount = await Account.ensure_account_exists(dstUsername);
-  console.log("dstAccount="+dstAccount);
-  if (dstAccount == null) {
-    return buildReturnJSON(
-      500,
-      JSON.stringify({
-        input: event,
-        username: dstUsername,
-        msg: "could not ensure user exists"
-      })
-    )
-  }
-  
-  var srcBalance = await Account.get_balance_for_user(srcUsername);
-  console.log("srcBalance="+srcBalance);
-  if(srcBalance>=sum)
-  {
-    var dstBalance = await Account.get_balance_for_user(dstUsername);
-    console.log("dstBalance="+dstBalance);
-    srcBalance=srcBalance - sum; 
-    dstBalance=dstBalance + sum;    
-
-    console.log("update srcBalance ="+dstBalance);
-    srcBalance = await Account.updateBalance(srcUsername,srcBalance);
-    console.log("update dstBalance ="+dstBalance);
-    dstBalance = await Account.updateBalance(dstUsername,dstBalance);
-    return buildReturnJSON(
-      200, 
-      JSON.stringify({
-        input: event,
-        srcBalance: srcBalance,
-        dstBalance: dstBalance,
-      })
-    );
-  }
-  else
-  {
-    return buildReturnJSON(
-      500,
-      JSON.stringify({
-       // input: event,
-       // username: srcBalance,
-        msg: "Balance Error"
-      })
-    )
-  }
-};
-*/
 module.exports.transferToAccount = async (event, context) => {
   var srcUsername = getCognitoUser(event, context);
  
@@ -227,3 +144,89 @@ module.exports.ensureuserexists = async (event, context) => {
     );
   }
 };
+
+
+
+/*
+module.exports.transferToAccount = async (event, context) => {
+  var srcUsername = getCognitoUser(event, context);
+ 
+  console.log("body="+event.body);
+
+  console.log("event-Json"+event.JSON);
+  
+  var obj = JSON.parse(event.body);
+
+  var dstUsername = obj.dstusername;
+  var sum = parseFloat(obj.sum);
+
+  var temp = JSON.stringify({
+    input: event,
+    event: event,
+    msg: "could not ensure user exists"
+  })
+
+  console.log("temp="+temp);
+
+  console.log("dstUsername="+dstUsername);
+  console.log("sum="+sum);
+
+  var srcAccount = await Account.ensure_account_exists(srcUsername);
+  if (srcAccount == null) {
+    return  buildReturnJSON(
+      500,
+      JSON.stringify({
+        input: event,
+        username: srcUsername,
+        msg: "could not ensure user exists"
+      })
+    )
+  }
+  var  dstAccount = await Account.ensure_account_exists(dstUsername);
+  console.log("dstAccount="+dstAccount);
+  if (dstAccount == null) {
+    return buildReturnJSON(
+      500,
+      JSON.stringify({
+        input: event,
+        username: dstUsername,
+        msg: "could not ensure user exists"
+      })
+    )
+  }
+  
+  var srcBalance = await Account.get_balance_for_user(srcUsername);
+  console.log("srcBalance="+srcBalance);
+  if(srcBalance>=sum)
+  {
+    var dstBalance = await Account.get_balance_for_user(dstUsername);
+    console.log("dstBalance="+dstBalance);
+    srcBalance=srcBalance - sum; 
+    dstBalance=dstBalance + sum;    
+
+    console.log("update srcBalance ="+dstBalance);
+    srcBalance = await Account.updateBalance(srcUsername,srcBalance);
+    console.log("update dstBalance ="+dstBalance);
+    dstBalance = await Account.updateBalance(dstUsername,dstBalance);
+    return buildReturnJSON(
+      200, 
+      JSON.stringify({
+        input: event,
+        srcBalance: srcBalance,
+        dstBalance: dstBalance,
+      })
+    );
+  }
+  else
+  {
+    return buildReturnJSON(
+      500,
+      JSON.stringify({
+       // input: event,
+       // username: srcBalance,
+        msg: "Balance Error"
+      })
+    )
+  }
+};
+*/
