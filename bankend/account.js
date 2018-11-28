@@ -106,7 +106,7 @@ module.exports.updateBalance2 = async (username,srcBalance,dstBalance,sum,userna
  
     var driver3 = getNeo4jDriver();
     const session3 = driver.session();
-    const result3 = await session3.run("Match (m:User) WHERE m.name='"+dstBalance+"' set m.balance = '"+dstBalance+ "' RETURN m");
+    const result3 = await session3.run("Match (m:User) WHERE m.name='"+username2+"' set m.balance = '"+dstBalance+ "' RETURN m");
     session3.close();
     driver3.close();
 
