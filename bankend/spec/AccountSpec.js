@@ -20,7 +20,8 @@ describe("Account", function() {
 	expect (balance).toEqual(200);
     });
 
-    xit("return the right error code when no balance at the customer account", async function() {
+    it("return the right error code when no balance at the customer account", async function() {
+        
         var srcUserName = "test_balance_src-at-kashyoo.com";
         var dstUserName = "TEST2-at-kashyoo.com";
 
