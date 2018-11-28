@@ -55,7 +55,6 @@ module.exports.getaccountbalance = async (event, context) => {
   );
 };
 
-
 module.exports.transferToAccount = async (event, context) => {
   var srcUsername = getCognitoUser(event, context);
  
