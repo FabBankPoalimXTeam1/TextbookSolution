@@ -43,7 +43,7 @@ describe("Account", function() {
           
         console.log("TEST: transfer: " + json);
 
-        expect (returnedValue).toEqual(4);
+        expect (returnedValue).toEqual("4");
     });
 
 });
